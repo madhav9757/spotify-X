@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/svg+png" href="icons/icons8-spotify-96.png">
+    <link rel="stylesheet" href="style/utility.css">
+    <link rel="stylesheet" href="style/home.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify</title>
+</head>
+
+<body>
+
+    <div class="main-content">
+        <div class="round-border left-section">
+            <div class="round-border top-left-section">
+                <div>
+                    <img src="icons/Spotify_Full_Logo_RGB_Black.png" alt="spotify" class="invert">
+                    <div class="cross">
+                        <img src="https://cdn-icons-png.flaticon.com/512/9918/9918701.png" class="invert">
+                    </div>
+                </div>
+                <div>
+                    <div class="home">
+                        <img src="icons/icons8-home-24.png" class="invert" alt="">
+                        <p>Home</p>
+                    </div>
+                    <div class="search">
+                        <img src="icons/icons8-search-24.png" class="invert" alt="">
+                        <p>Search</p>
+                    </div>
+                </div>
+            </div>
+            <div class="round-border bottom-left-section">
+                <div>
+                    <div class="your-library-header">
+                        <img alt="Free Library Icon" class="invert"
+                            src="https://cdn.iconscout.com/icon/free/png-256/free-library-icon-download-in-svg-png-gif-file-formats--book-education-study-ui-ux-design-pack-user-interface-icons-2686275.png?f=webp&amp;w=256"
+                            srcset="https://cdn.iconscout.com/icon/free/png-256/free-library-icon-download-in-svg-png-gif-file-formats--book-education-study-ui-ux-design-pack-user-interface-icons-2686275.png?f=webp&amp;w=256 1x, https://cdn.iconscout.com/icon/free/png-256/free-library-icon-download-in-svg-png-gif-file-formats--book-education-study-ui-ux-design-pack-user-interface-icons-2686275.png?f=webp&amp;w=512 2x">
+                        <h3 id="library-name">Your Library</h3>
+                    </div>
+                    <div class="cart-song-list">
+                        
+                    </div>
+                </div>
+                <footer>
+                    <p>&copy; 2025 Spotify, Inc. All rights reserved.</p>
+                </footer>
+            </div>
+        </div>
+
+        <div class="round-border right-section">
+            <header class="round-border">
+                <div class="hamburger">
+                    <img src="https://cdn-icons-png.flaticon.com/512/10486/10486773.png" class="invert">
+                </div>
+                <div class="front-back">
+                    <p>
+                        <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/previous-1761086-1520856.png?f=webp&w=512" class="invert">
+                    </p>
+                    <P>
+                        <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/next-1823411-1545781.png?f=webp&w=512" class="invert">
+                    </P>
+                </div>
+                <div class="header-content">
+                    <a href="/sign-up.html"><button>Sign up</button></a>
+                    <a href="/log-in.html"><button>Log in</button></a>
+                </div>
+            </header>
+            <div class="cart-container">
+                <div class="spotify-list-name">
+                    <p>Spotify Playlists</p>
+                </div>
+                <div class="cart-section">
+                    
+                </div>
+            </div>
+            <footer class="play-song">
+                <div class="music-player">
+                    <div>
+                        <h3 id="title-name"></h3>
+                    </div>
+                    <div class="controls">
+                        <img alt="Previous" class="invert control-btn" id="previous" src="https://cdn-icons-png.flaticon.com/512/11908/11908126.png">
+                        <img alt="Play/Pause" class="invert control-btn" id="play" src="https://cdn-icons-png.flaticon.com/512/18941/18941526.png">
+                        <img alt="Next" class="invert control-btn" id="next" src="https://cdn-icons-png.flaticon.com/512/1/1371.png">
+                    </div>
+                    <div class="duration">
+                        <h3 id="duration"></h3>
+                        <div>
+                            <img src="https://images.icon-icons.com/1678/PNG/512/wondicon-ui-free-speaker_111240.png" class="invert" id="volume">
+                            <input type="range" id="volumeSlider" min="0" max="100" value="50">                       
+                        </div>
+                    </div>
+                </div>                
+                <div class="seekbar">
+                    <div class="circle"></div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script  src="script/home.js"></script>
+
+</body>
+
+</html>

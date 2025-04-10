@@ -1,0 +1,84 @@
+.invert {
+    filter: invert(100%);
+}
+
+.round-border {
+    border: none;
+    border-radius: 5px;
+}
+
+
+/* Scrollbar for WebKit (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 6px; /* Thinner width */
+    height: 6px;
+    margin-left: 10px; /* Space between content and scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #121212; /* Dark background */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1db954; /* Spotify green */
+    border-radius: 10px;
+    border: 2px solid #121212;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1ed760; /* Lighter green on hover */
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #1db954 #121212;
+}
+
+
+
+
+
+
+/* Custom Volume Slider */
+#volumeSlider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 6px;
+    background: #404040;
+    border-radius: 5px;
+    outline: none;
+    transition: 0.3s;
+}
+
+/* Volume Slider Thumb (for Chrome, Safari) */
+#volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #1DB954; /* Spotify Green */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+#volumeSlider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* Volume Slider Thumb (for Firefox) */
+#volumeSlider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #1DB954;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Active state */
+#volumeSlider:focus {
+    outline: none;
+}

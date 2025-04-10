@@ -1,0 +1,148 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px;
+}
+
+.signup-box {
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+p {
+    font-size: 14px;
+    color: #b3b3b3;
+}
+
+.social-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.google {
+    background-color: #db4437;
+    color: white;
+}
+
+.facebook {
+    background-color: #3b5998;
+    color: white;
+}
+
+.social-btn:hover {
+    opacity: 0.8;
+}
+
+.divider {
+    margin: 20px 0;
+    position: relative;
+    text-align: center;
+}
+
+.divider span {
+    background-color: #1e1e1e;
+    padding: 0 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.divider::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: #444;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 1;
+}
+
+form {
+    text-align: left;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 400;
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #292929;
+    color: white;
+    font-size: 14px;
+}
+
+input::placeholder {
+    color: #b3b3b3;
+}
+
+.signup-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #1db954;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.signup-btn:hover {
+    background-color: #17a249;
+}
+
+.login-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #1db954;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
