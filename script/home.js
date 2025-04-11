@@ -163,19 +163,20 @@ document.querySelector('.cross').addEventListener('click', () => {
     document.querySelector('.left-section').style.left = '-100%';
 });
 
+
 document.getElementById('previous').addEventListener('click', () => {
-    if (!audio) return;
-    let temp_2 = audio.src.split('/').slice(-2).join('/');
-    const index = songList.findIndex(songList => songList.source.endsWith(temp_2));
+    let temp_2 = decodeURIComponent(audio.src.split('/').slice(-1).join('/').replace(/\.(mp3|flac)$/, ''));
+    const index = songList.findIndex(songList => songList.title === temp_2);
+
     if (index - 1 >= 0) {
         playMusic(songList[index - 1].source, songList[index - 1].title);
     }
 });
 
 document.getElementById('next').addEventListener('click', () => {
-    if (!audio) return;
-    let temp_2 = audio.src.split('/').slice(-2).join('/');
-    const index = songList.findIndex(songList => songList.source.endsWith(temp_2));
+    let temp_2 = decodeURIComponent(audio.src.split('/').slice(-1).join('/').replace(/\.(mp3|flac)$/, ''));
+    const index = songList.findIndex(songList => songList.title === temp_2);
+
     if (index !== -1 && index + 1 < songList.length) {
         playMusic(songList[index + 1].source, songList[index + 1].title);
     }
