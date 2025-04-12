@@ -484,188 +484,7 @@ body {
 }
 
 
-
-@media (max-width: 320px) {
-
-    .main-content {
-
-        .left-section {
-            position: absolute;
-            left: -100vw;
-            bottom: 0px;
-            width: 100vw;
-            transition: 0.3s ease;
-            z-index: 1;
-            background-color: #121212;
-
-            .top-left-section {
-                height: 20vh;
-                margin-bottom: 5px;
-
-                >div:first-child {
-
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-
-                    >div {
-                        display: flex;
-
-                        img {
-                            height: 25px;
-                            width: 25px;
-                        }
-                    }
-                }
-
-                >div:nth-child(2) {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    font-size: 0.9rem;
-
-                    >div {
-                        padding: 2px 5px;
-
-                        img {
-                            margin-right: 8px
-                        }
-
-                        ;
-                    }
-                }
-
-                :hover {
-                    transition: none;
-                }
-            }
-
-            .bottom-left-section {
-                >div {
-                    .your-library-header {
-                        justify-content: center;
-                        margin-bottom: 5px;
-                    }
-                }
-            }
-
-            footer {
-                display: none;
-            }
-        }
-
-        .right-section {
-
-            width: 100vw;
-
-            header {
-                height: 10vh;
-
-                .hamburger {
-                    display: flex;
-
-                    img {
-                        height: 25px;
-                    }
-                }
-
-                .front-back>p {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-
-                    img {
-                        height: 20px;
-
-                    }
-
-                    ;
-                }
-
-                .header-content {
-                    >a:first-child {
-                        display: none;
-                    }
-                }
-            }
-
-            .cart-container {
-                width: 100%;
-
-                .spotify-list-name {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-
-                .cart-section {
-
-                    grid-template-columns: 1fr;
-                    justify-items: center;
-
-                    .song-card {
-                        padding: 15px;
-                        width: 80%;
-                        height: 60vh;
-                    }
-
-
-                }
-            }
-
-            .play-song {
-                height: 20vh;
-                width: 80vw;
-                margin: 0vw 10vw;
-                position: absolute;
-                bottom: 10px;
-                border-radius: 8px;
-
-                .music-player {
-                    width: 100%;
-                    height: 85%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-evenly;
-                    align-items: center;
-                    margin-top: 0px;
-
-                    >div:first-child {
-                        max-width: 90%;
-                    }
-
-                    #title-name {
-                        font-size: 0.8rem;
-                    }
-
-                    >div {
-                        height: 25px;
-
-                        img {
-                            width: 25px;
-                            height: 25px;
-                        }
-                    }
-
-                    .duration {
-                        gap: 10px;
-
-                        #volumeSlider {
-                            width: 70px;
-                        }
-
-                        img {
-                            height: 25px;
-                            width: 25px;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media (max-width: 480px) and (min-width: 320px) {
+@media (max-width: 384px) {
 
     .main-content {
 
@@ -712,7 +531,7 @@ body {
             width: 100vw;
 
             header {
-                height: 10vh;
+                height: 6vh;
 
                 .hamburger {
                     display: flex;
@@ -745,7 +564,7 @@ body {
 
                     .song-card {
                         padding: 20px;
-                        width: 98%;
+                        width: 90%;
                         height: 60vh;
                     }
 
@@ -754,6 +573,7 @@ body {
 
                         img {
                             object-fit: contain;
+                            border-radius: 8px;
                         }
                     }
                 }
@@ -811,7 +631,7 @@ body {
     }
 }
 
-@media (max-width: 568px) and (min-width: 480px) {
+@media (max-width: 629px) and (min-width: 384px) {
     .main-content {
 
         .left-section {
@@ -944,7 +764,7 @@ body {
     }
 }
 
-@media (max-width: 900px) and (min-width: 568px) {
+@media (max-width: 970px) and (min-width: 629px) {
     .main-content {
 
         .left-section {
@@ -1075,7 +895,7 @@ body {
     }
 }
 
-@media (max-width : 1024px) and (min-width: 900px) {
+@media (max-width : 1024px) and (min-width: 972px) {
 
     .left-section {
         width: 35vw;
@@ -1084,7 +904,7 @@ body {
 
     .right-section {
         .cart-container .cart-section {
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr ;
         }
 
         .play-song {
@@ -1117,7 +937,7 @@ body {
 
 }
 
-@media (max-width: 1200px) and (min-width: 1024px) {
+@media (max-width: 1321px) and (min-width: 1024px) {
 
     .left-section {
         width: 30vw;
@@ -1154,7 +974,7 @@ body {
     }
 }
 
-@media (max-width: 1400px) and (min-width : 1200px) {
+@media (max-width: 1400px) and (min-width : 1321px) {
 
     .right-section .cart-container .cart-section {
         grid-template-columns: 1fr 1fr 1fr 1fr;
