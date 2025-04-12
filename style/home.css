@@ -207,22 +207,6 @@ body {
     }
 }
 
-.album-art {
-    width: 100%;
-    max-width: 250px;
-    border-radius: 10px;
-}
-
-.song-info {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.song-title {
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
 .right-section {
     flex: 1;
     height: 100%;
@@ -738,19 +722,6 @@ body {
                     }
                 }
 
-                .front-back>p {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-
-                    img {
-                        height: 20px;
-
-                    }
-
-                    ;
-                }
-
                 .header-content {
                     >a:first-child {
                         display: none;
@@ -773,12 +744,18 @@ body {
                     justify-items: center;
 
                     .song-card {
-                        padding: 15px;
-                        width: 80%;
+                        padding: 20px;
+                        width: 98%;
                         height: 60vh;
                     }
 
+                    .album-art {
+                        width: 100%;
 
+                        img {
+                            object-fit: contain;
+                        }
+                    }
                 }
             }
 
