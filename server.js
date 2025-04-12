@@ -14,13 +14,22 @@ app.use('/songs', express.static(path.join(__dirname, 'songs')));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'home.html'));
 });
+
 app.get('/log-in', (req, res) => {
-    res.sendFile(path.join(__dirname, 'log-in.html'));
-});
-app.get('/sign-up', (req, res) => {
-    res.sendFile(path.join(__dirname, 'sign-up.html'));
+    res.sendFile(path.join(__dirname,'public','log-in.html'), (err) => {
+        if (err) {
+            res.status(err.status).end();
+        }
+    });
 });
 
+app.get('/sign-up', (req, res) => {
+    res.sendFile(path.join(__dirname,'public','sign-up.html'), (err) => {
+        if (err) {
+            res.status(err.status).end();
+        }
+    });
+});
 // API route: Get folder names in /songs
 app.get('/api/songs', (req, res) => {
     const songsDir = path.join(__dirname, 'songs');
