@@ -136,7 +136,7 @@
     background-clip: content-box;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
 
     .main-view {
         padding: 0%;
