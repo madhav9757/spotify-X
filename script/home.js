@@ -72,18 +72,15 @@ async function loadSongs(folder) {
             });
         }
 
-        document.getElementById('total-songs').textContent = songList.length;
-        let html = '';
+        const durationPromises = songList.map(song => getAudioDuration(song.source));
+        const durations = await Promise.all(durationPromises);
+
         let totalMinutes = 0;
-
-        for (let i = 0; i < songList.length; i++) {
-            const song = songList[i];
-            const duration = await getAudioDuration(song.source);
-            const formattedDuration = formatTime(duration);
-            totalMinutes += duration;
-
-            html += `
-                <div class="track track-row" data-src="${song.source}" data-title="${song.title}">
+        let html = songList.map((song, i) => {
+            const formattedDuration = formatTime(durations[i]);
+            totalMinutes += durations[i];
+            // Keep your existing HTML template
+            return `<div class="track track-row" data-src="${song.source}" data-title="${song.title}">
                     <div>${i + 1}</div>
                     <div class="track-title-wrapper">
                         <strong>${song.title}</strong>
@@ -93,10 +90,8 @@ async function loadSongs(folder) {
                     <button class="track-play play-btn invert">
                         <img src="icons/play.png" alt="Play">
                     </button>
-                </div>
-            `;
-
-        }
+                </div>`;
+        }).join('');
 
         document.getElementById('total-min').textContent = formatTime(totalMinutes);
         // Inject HTML into the tracklist section
@@ -107,22 +102,22 @@ async function loadSongs(folder) {
             row.addEventListener('click', async (e) => {
                 const src = row.getAttribute('data-src');
                 const title = row.getAttribute('data-title');
-        
+
                 // Remove 'active' from others
                 document.querySelectorAll('.track-row').forEach(t => {
                     t.classList.remove('active');
                     const badge = t.querySelector('.now-playing-badge');
                     if (badge) badge.style.display = 'none';
                 });
-        
+
                 // Set active and show badge
                 row.classList.add('active');
                 const badge = row.querySelector('.now-playing-badge');
                 if (badge) badge.style.display = 'block';
-        
+
                 const button = row.querySelector('.play-btn');
                 button.classList.add('loading');
-        
+
                 try {
                     playMusic(src, title);
                     const total = formatTime(audio.duration);
@@ -130,7 +125,7 @@ async function loadSongs(folder) {
                     audio.addEventListener("timeupdate", updateTime);
                     document.querySelector('.play-song').style.display = 'flex';
                     document.querySelector('.play-song').scrollIntoView({ behavior: 'smooth' });
-        
+
                     await new Promise(res => setTimeout(res, 300));
                 } catch (err) {
                     console.warn("Track load/play error:", err);
@@ -139,7 +134,7 @@ async function loadSongs(folder) {
                 }
             });
         });
-        
+
 
     } catch (error) {
         console.error("Error fetching songs:", error);
