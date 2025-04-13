@@ -16,7 +16,7 @@ body {
 }
 
 .main-content {
-    display: flex;
+    width: 100vw;
     gap: 10px;
     height: 100vh;
     background-color: #121212;
@@ -52,7 +52,7 @@ body {
 
         .header-content {
             position: absolute;
-            right: 20px ;
+            right: 20px;
         }
 
         .header-content>a>button {
@@ -98,7 +98,7 @@ body {
 
         .cart-section {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr ;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 10px;
             height: 80vh;
             width: 100%;
@@ -310,109 +310,104 @@ body {
 
             header {
                 height: 6vh;
+            }
 
-                .hamburger {
+            .header-content {
+                >a:first-child {
+                    display: none;
+                }
+            }
+        }
+
+        .cart-container {
+            width: 100%;
+
+            .spotify-list-name {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            
+            }
+
+            .cart-section {
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .song-card {
+                    padding: 20px;
+                    width: 90%;
+                    height: 60vh;
                     display: flex;
+                    justify-content: center;
+                    font-size: 1.2rem;
+
+                }
+
+                .album-art {
+                    width: 100%;
+                    margin-bottom: 10px;
+
+                    img {
+                        object-fit: contain;
+                        border-radius: 8px;
+                    }
+                }
+            }
+        }
+
+        .play-song {
+            height: 20vh;
+            width: 80vw;
+            margin: 0vw 10vw;
+            position: absolute;
+            bottom: 10px;
+            border-radius: 8px;
+
+            .music-player {
+                width: 100%;
+                height: 85%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+                margin-top: 0px;
+
+                >div:first-child {
+                    max-width: 90%;
+                }
+
+                #title-name {
+                    font-size: 0.8rem;
+                }
+
+                >div {
+                    height: 25px;
+
+                    img {
+                        width: 25px;
+                        height: 25px;
+                    }
+                }
+
+                .duration {
+                    gap: 10px;
+
+                    #volumeSlider {
+                        width: 70px;
+                    }
 
                     img {
                         height: 25px;
-                    }
-                }
-
-                .header-content {
-                    >a:first-child {
-                        display: none;
-                    }
-                }
-            }
-
-            .cart-container {
-                width: 100%;
-
-                .spotify-list-name {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-
-                .cart-section {
-
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-
-                    .song-card {
-                        padding: 20px;
-                        width: 90%;
-                        height: 60vh;
-                        display: flex;
-                        justify-content: center;
-
-                    }
-
-                    .album-art {
-                        width: 100%;
-                        margin-bottom: 10px;
-
-                        img {
-                            object-fit: contain;
-                            border-radius: 8px;
-                        }
-                    }
-                }
-            }
-
-            .play-song {
-                height: 20vh;
-                width: 80vw;
-                margin: 0vw 10vw;
-                position: absolute;
-                bottom: 10px;
-                border-radius: 8px;
-
-                .music-player {
-                    width: 100%;
-                    height: 85%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-evenly;
-                    align-items: center;
-                    margin-top: 0px;
-
-                    >div:first-child {
-                        max-width: 90%;
-                    }
-
-                    #title-name {
-                        font-size: 0.8rem;
-                    }
-
-                    >div {
-                        height: 25px;
-
-                        img {
-                            width: 25px;
-                            height: 25px;
-                        }
-                    }
-
-                    .duration {
-                        gap: 10px;
-
-                        #volumeSlider {
-                            width: 70px;
-                        }
-
-                        img {
-                            height: 25px;
-                            width: 25px;
-                        }
+                        width: 25px;
                     }
                 }
             }
         }
     }
 }
+
 
 @media (max-width: 629px) and (min-width: 384px) {
     .main-content {
@@ -551,7 +546,7 @@ body {
                 }
 
                 .cart-section {
-                    grid-template-columns: 1fr 1fr 1fr ;
+                    grid-template-columns: 1fr 1fr 1fr;
                 }
             }
 

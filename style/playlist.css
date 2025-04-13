@@ -85,11 +85,11 @@
 .tracklist-header,
 .track {
     display: grid;
-    grid-template-columns: 30px 3fr 30px 30px;
+    grid-template-columns: 30px 1fr 30px 20px;
     /* Tighter layout */
     padding: 8px 12px;
     align-items: center;
-    gap: 10px;
+    gap: 10px 20px;
 }
 
 /* Track row */
@@ -112,6 +112,7 @@
 .play-btn {
     background-color: transparent;
     border: none;
+    margin-left: 10px;
 
     img {
         height: 24px;
@@ -133,4 +134,32 @@
     border-radius: 5px;
     border: 2px solid transparent;
     background-clip: content-box;
+}
+
+@media (max-width: 500px) {
+
+    .main-view {
+        padding: 0%;
+    }
+
+    .spotify-app {
+
+        padding: 20px 20px;
+
+        #close-btn-ye {
+            height: 25px;
+        }
+
+        .playlist-header {
+            display: flex;
+            flex-direction: column;
+
+        }
+    }
+
+    .tracklist-header,
+    .track {
+        grid-template-columns: 30px 150px 30px 20px;
+    }
+
 }
