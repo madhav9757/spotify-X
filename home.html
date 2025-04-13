@@ -5,6 +5,7 @@
     <link rel="icon" type="image/svg+png" href="https://cdn-icons-png.flaticon.com/512/3355/3355341.png">
     <link rel="stylesheet" href="style/utility.css">
     <link rel="stylesheet" href="style/home.css">
+    <link rel="stylesheet" href="style/playlist.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Just Chill !</title>
@@ -13,51 +14,8 @@
 <body>
 
     <div class="main-content">
-        <div class="round-border left-section">
-            <div class="round-border top-left-section">
-                <div>
-                    <div>
-                        <img src="https://cdn-icons-png.flaticon.com/512/3355/3355341.png" alt="">
-                        <p>Just Chill !</p>
-                    </div>
-                    <div class="cross">
-                        <img src="https://cdn-icons-png.flaticon.com/512/9918/9918701.png" class="invert">
-                    </div>
-                </div>
-                <div>
-                    <div class="home">
-                        <img src="icons/icons8-home-24.png" class="invert" alt="">
-                        <p>Home</p>
-                    </div>
-                    <div class="search">
-                        <img src="icons/icons8-search-24.png" class="invert" alt="">
-                        <p>Search</p>
-                    </div>
-                </div>
-            </div>
-            <div class="round-border bottom-left-section">
-                <div>
-                    <div class="your-library-header">
-                        <img alt="Free Library Icon" class="invert"
-                            src="https://cdn.iconscout.com/icon/free/png-256/free-library-icon-download-in-svg-png-gif-file-formats--book-education-study-ui-ux-design-pack-user-interface-icons-2686275.png?f=webp&amp;w=256"
-                            srcset="https://cdn.iconscout.com/icon/free/png-256/free-library-icon-download-in-svg-png-gif-file-formats--book-education-study-ui-ux-design-pack-user-interface-icons-2686275.png?f=webp&amp;w=256 1x, https://cdn.iconscout.com/icon/free/png-256/free-library-icon-download-in-svg-png-gif-file-formats--book-education-study-ui-ux-design-pack-user-interface-icons-2686275.png?f=webp&amp;w=512 2x">
-                        <h3 id="library-name">Your Library</h3>
-                    </div>
-                    <div class="cart-song-list">
-                        
-                    </div>
-                </div>
-                <footer>
-                    <p>&copy; 2025 Spotify, Inc. All rights reserved.</p>
-                </footer>
-            </div>
-        </div>
-
         <div class="round-border right-section">
             <header class="round-border">
-                <div class="hamburger">
-                    <img src="https://cdn-icons-png.flaticon.com/512/10486/10486773.png" class="invert">
-                </div>
                 <div class="header-content">
                     <a href="/sign-up"><button>Sign up</button></a>
                     <a href="/log-in"><button>Log in</button></a>
@@ -95,6 +53,31 @@
             </footer>
         </div>
     </div>
+
+    <div class="spotify-app">
+        <img src="https://cdn-icons-png.flaticon.com/512/9918/9918701.png" alt="close" class="invert" id="close-btn-ye">
+        <main class="main-view">
+          <header class="playlist-header">
+            <img id="playlist-img" src="" alt="Chill Vibes" />
+            <div class="playlist-meta">
+              <span class="playlist-type">PLAYLIST</span>
+              <h1 id="playlist-name">Chill Vibes</h1>
+              <p>Relax and unwind with chilled-out tracks.</p>
+              <span class="playlist-details">Spotify • <span id="total-songs">10</span> songs, <span id="total-min">35</span> min</span>
+            </div>
+          </header>
+    
+          <section class="tracklist-header">
+            <div>#</div>
+            <div>Title</div>
+            <div>Duration</div>
+          </section>
+    
+          <section class="tracklist">    
+            <!-- Add more tracks here -->
+          </section>
+        </main>
+      </div>
 
     <script  src="script/home.js"></script>
 

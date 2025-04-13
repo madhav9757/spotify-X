@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/log-in', (req, res) => {
-    res.sendFile(path.join(__dirname,'public','log-in.html'), (err) => {
+    res.sendFile(path.join(__dirname, 'public', 'log-in.html'), (err) => {
         if (err) {
             res.status(err.status).end();
         }
@@ -24,12 +24,21 @@ app.get('/log-in', (req, res) => {
 });
 
 app.get('/sign-up', (req, res) => {
-    res.sendFile(path.join(__dirname,'public','sign-up.html'), (err) => {
+    res.sendFile(path.join(__dirname, 'public', 'sign-up.html'), (err) => {
         if (err) {
             res.status(err.status).end();
         }
     });
 });
+
+app.get('/playlist', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'playlist.html'), (err) => {
+        if (err) {
+            res.status(err.status).end();
+        }
+    });
+});
+
 // API route: Get folder names in /songs
 app.get('/api/songs', (req, res) => {
     const songsDir = path.join(__dirname, 'songs');
@@ -42,6 +51,7 @@ app.get('/api/songs', (req, res) => {
 
 // API route: Get song files in a folder
 app.get('/api/songs/:folder', (req, res) => {
+
     const folderName = req.params.folder;
     const folderPath = path.join(__dirname, 'songs', folderName);
 
@@ -49,15 +59,10 @@ app.get('/api/songs/:folder', (req, res) => {
         if (err) {
             return res.status(404).json({ error: 'Folder not found' });
         }
-
-        const songFiles = files.filter(file =>
-            file.endsWith('.mp3') || file.endsWith('.flac')
-        );
-
+        const songFiles = files;
         res.json(songFiles);
     });
 });
-
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);

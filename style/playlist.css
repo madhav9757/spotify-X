@@ -1,0 +1,136 @@
+/* Container */
+.spotify-app {
+    position: absolute;
+    z-index: 1000;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    padding: 20px 40px;
+    background: linear-gradient(to bottom, #1f1f1f 0%, #121212 100%);
+    overflow: hidden;
+}
+
+#close-btn-ye {
+    height: 30px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+}
+
+/* Main area */
+.main-view {
+    flex: 1;
+    padding: 60px 100px;
+    overflow-y: auto;
+}
+
+/* Playlist header */
+.playlist-header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    /* Center horizontally */
+    text-align: center;
+    /* Center text inside */
+    margin: 0 auto 30px auto;
+    /* Center the whole block */
+    max-width: 800px;
+}
+
+.playlist-header img {
+    width: 160px;
+    height: 160px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.playlist-meta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+}
+
+.playlist-type {
+    font-size: 11px;
+    font-weight: bold;
+    color: #b3b3b3;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.playlist-meta h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.playlist-meta p,
+.playlist-details {
+    font-size: 13px;
+    color: #b3b3b3;
+}
+
+/* Tracklist header */
+.tracklist-header {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #b3b3b3;
+    border-bottom: 1px solid #282828;
+}
+
+.tracklist-header,
+.track {
+    display: grid;
+    grid-template-columns: 30px 3fr 30px 30px;
+    /* Tighter layout */
+    padding: 8px 12px;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Track row */
+.track {
+    border-bottom: 1px solid #181818;
+    transition: background-color 0.2s ease;
+}
+
+.track:hover {
+    background-color: #2a2a2a;
+    cursor: pointer;
+}
+
+.track strong {
+    font-size: 14px;
+    color: #fff;
+}
+
+/* Play button */
+.play-btn {
+    background-color: transparent;
+    border: none;
+
+    img {
+        height: 24px;
+        cursor: pointer;
+    }
+}
+
+/* Scrollbar */
+.main-view::-webkit-scrollbar {
+    width: 10px;
+}
+
+.main-view::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.main-view::-webkit-scrollbar-thumb {
+    background-color: #333;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}

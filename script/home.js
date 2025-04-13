@@ -6,7 +6,7 @@ async function FindFolder() {
         let songs = await response.json();
 
         folderCart.innerHTML = songs.map(folder => `
-            <div data-value="${folder}" class="song-card">
+            <div class="song-card" onClick="loadSongs('${folder}')">
                 <div class="album-art">
                     <img src="" alt="Album Art" id="card-img-${folder}">
                     <button class="play-button">&#9654;</button>
@@ -21,17 +21,11 @@ async function FindFolder() {
             try {
                 let anc = await fetch(`/songs/${e}/${e}.json`);
                 let bcd = await anc.json();
-                document.getElementById(`card-img-${e}`).src = bcd.img || "icons/default-cover.png";
+                playlistImage = bcd.img;
+                document.getElementById(`card-img-${e}`).src = playlistImage;
             } catch (error) {
                 console.error(`Failed to load JSON for ${e}`, error);
             }
-        });
-
-        document.querySelectorAll('.song-card').forEach(card => {
-            card.addEventListener("click", () => {
-                document.getElementById('library-name').textContent = card.dataset.value;
-                loadSongs(card.dataset.value);
-            });
         });
 
     } catch (error) {
@@ -42,38 +36,83 @@ FindFolder();
 
 const listSong = document.querySelector('.cart-song-list');
 const playPauseBtn = document.getElementById("play");
+const tracklistContainer = document.querySelector('.tracklist');
 
 let audio = null;
 let songList = [];
 
 async function loadSongs(folder) {
+    document.querySelector('.spotify-app').style.display = 'flex';
+
     try {
-        let response = await fetch(`/api/songs/${folder}`);
+        const response = await fetch(`/api/songs/${folder}`);
         if (!response.ok) throw new Error(`HTTP error ${response.status}`);
-
         const files = await response.json();
+        const { foldername } = files;
 
-        songList = files.map(file => ({
-            title: decodeURIComponent(file.replace(/\.(mp3|flac)$/, '')),
-            source: `/songs/${folder}/${file}`
-        }));
+        const anc = await fetch(`/songs/${folder}/${folder}.json`);
+        const songs = await anc.json();
+        document.getElementById('playlist-img').src = songs.img;
 
-        listSong.innerHTML = songList.map(song => `
-            <div class="song-cart">
-                <img class="invert" src="icons/icons8-musical-note-30.png" alt="">
-                <div>
-                    <h3>${song.title}</h3>
-                </div>    
-                <button class="invert play-btn" data-src="${song.source}">
-                    <img src="icons/play.png" alt="">
-                </button>    
-            </div>    
-        `).join('');
+        songList = files
+            .filter(file => file.endsWith('.mp3') || file.endsWith('.m4a') || file.endsWith('.flac'))
+            .map(file => ({
+                title: decodeURIComponent(file.replace(/\.(mp3|flac|m4a)$/, '')),
+                source: `/songs/${folder}/${encodeURIComponent(file)}`
+            }));
+
+        // Helper to get audio duration
+        async function getAudioDuration(src) {
+            return new Promise((resolve) => {
+                const audio = new Audio();
+                audio.src = src;
+                audio.addEventListener('loadedmetadata', () => {
+                    resolve(audio.duration);
+                });
+                audio.addEventListener('error', () => resolve(0));
+            });
+        }
+
+        document.getElementById('total-songs').textContent = songList.length ;
+        let html = '';
+        let totalMinutes = 0;
+        
+        for (let i = 0; i < songList.length; i++) {
+            const song = songList[i];
+            const duration = await getAudioDuration(song.source);
+            const formattedDuration = formatTime(duration);
+            totalMinutes += duration ;
+            
+            html += `
+            <div class="track">
+            <div>${i + 1}</div>
+            <div><strong>${song.title}</strong></div>
+            <div>${formattedDuration}</div>
+            <button class="track-play play-btn invert" data-src="${song.source}" data-title="${song.title}">
+            <img src="icons/play.png" alt="Play">
+            </button>
+            </div>
+            `;
+        }
+        
+        document.getElementById('total-min').textContent = formatTime(totalMinutes) ;
+        // Inject HTML into the tracklist section
+        document.querySelector('.tracklist').innerHTML = html;
+
+        // Set up button click listeners
+        document.querySelectorAll('.play-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const src = button.getAttribute('data-src');
+                const title = button.getAttribute('data-title');
+                playMusic(src, title);
+            });
+        });
 
     } catch (error) {
         console.error("Error fetching songs:", error);
     }
 }
+
 
 function playMusic(source, title) {
     if (audio) {
@@ -87,7 +126,8 @@ function playMusic(source, title) {
     audio = new Audio(source);
 
     audio.addEventListener('loadedmetadata', () => {
-        document.getElementById('duration').textContent = `00:00 / 00:00`;
+        const total = formatDuration(audio.duration);
+        document.getElementById('duration').textContent = `00:00 / ${total}`;
         audio.addEventListener("timeupdate", updateTime);
     });
 
@@ -100,18 +140,6 @@ function playMusic(source, title) {
         }
     });
 }
-
-listSong.addEventListener('click', (event) => {
-    const songCart = event.target.closest('.song-cart');
-    if (!songCart) return;
-
-    const title = songCart.querySelector("h3").textContent.trim();
-    const songData = songList.find(e => e.title === title);
-    if (!songData) return;
-
-    document.querySelector('.play-song').style.display = 'flex';
-    playMusic(songData.source, songData.title);
-});
 
 playPauseBtn.addEventListener('click', () => {
     if (!audio) return;
@@ -154,15 +182,6 @@ document.querySelector('.seekbar').addEventListener('click', (e) => {
     document.querySelector('.circle').style.left = percent + "%";
     audio.currentTime = ((audio.duration) * percent) / 100;
 });
-
-document.querySelector('.hamburger').addEventListener('click', () => {
-    document.querySelector('.left-section').style.left = '0px';
-});
-
-document.querySelector('.cross').addEventListener('click', () => {
-    document.querySelector('.left-section').style.left = '-100%';
-});
-
 
 document.getElementById('previous').addEventListener('click', () => {
     let temp_2 = decodeURIComponent(audio.src.split('/').slice(-1).join('/').replace(/\.(mp3|flac)$/, ''));
@@ -218,3 +237,7 @@ function updateVolumeIcon(volume) {
         volumeIcon.src = "https://images.icon-icons.com/3691/PNG/512/music_loud_sound_audio_icon_229540.png";
     }
 }
+
+document.getElementById('close-btn-ye').addEventListener('click', () => {
+    document.querySelector('.spotify-app').style.display = 'none';
+})
