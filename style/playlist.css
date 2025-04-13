@@ -163,3 +163,34 @@
     }
 
 }
+
+.play-btn.loading img {
+    animation: spin 1s linear infinite;
+    opacity: 0.6;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.track-title-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.now-playing-badge {
+    font-size: 10px;
+    color: #1db954;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 3px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
