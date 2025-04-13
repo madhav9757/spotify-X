@@ -139,7 +139,7 @@
 @media (max-width: 600px) {
 
     .main-view {
-        padding: 0%;
+        padding: 0px 20px;
     }
 
     .spotify-app {
@@ -159,7 +159,7 @@
 
     .tracklist-header,
     .track {
-        grid-template-columns: 30px 150px 30px 20px;
+        grid-template-columns: 30px 1fr 30px 20px;
     }
 
 }
