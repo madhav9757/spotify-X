@@ -337,17 +337,22 @@ body {
 
                 .cart-section {
 
-                    grid-template-columns: 1fr;
-                    justify-items: center;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
 
                     .song-card {
                         padding: 20px;
                         width: 90%;
                         height: 60vh;
+                        display: flex;
+                        justify-content: center;
+
                     }
 
                     .album-art {
                         width: 100%;
+                        margin-bottom: 10px;
 
                         img {
                             object-fit: contain;
@@ -506,7 +511,7 @@ body {
     }
 }
 
-@media (max-width: 970px) and (min-width: 629px) {
+@media (max-width: 890px) and (min-width: 629px) {
     .main-content {
 
         .right-section {
@@ -601,11 +606,11 @@ body {
     }
 }
 
-@media (max-width : 1024px) and (min-width: 972px) {
+@media (max-width : 1024px) and (min-width: 890px) {
 
     .right-section {
         .cart-container .cart-section {
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
         }
 
         .play-song {
@@ -638,7 +643,7 @@ body {
 
 }
 
-@media (max-width: 1321px) and (min-width: 1024px) {
+@media (max-width: 1213px) and (min-width: 1024px) {
     .right-section {
         .cart-container .cart-section {
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -669,8 +674,14 @@ body {
     }
 }
 
-@media (max-width: 1400px) and (min-width : 1321px) {
+@media (max-width: 1400px) and (min-width : 1213px) {
 
+    .right-section .cart-container .cart-section {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width : 1400px) {
     .right-section .cart-container .cart-section {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }
