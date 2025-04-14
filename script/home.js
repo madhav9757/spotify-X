@@ -246,9 +246,12 @@ function updateTime() {
         circle.style.left = (audio.currentTime / audio.duration) * 100 + "%";
     }
 
-    if (audio.ended) {
-        let temp_2 = audio.src.split('/').slice(-2).join('/');
-        const index = songList.findIndex(songList => songList.source.endsWith(temp_2));
+    if (currentTime === totalDuration) {
+        const currentSrc = audio.src.split('/').slice(-1)[0];
+        const index = songList.findIndex(song =>
+            song.source.endsWith(currentSrc)
+        );
+
         if (index !== -1 && index + 1 < songList.length) {
             const row = document.querySelector(`.track-row[data-src="${songList[index + 1].source}"]`);
             playMusic(songList[index + 1].source, songList[index + 1].title, row);
