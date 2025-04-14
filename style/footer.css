@@ -276,6 +276,11 @@
         margin-left: -20px;
         /* Smaller title font */
     }
+
+    .main{
+        padding: 0px 15px ;
+    }
+    
     .player-center{
         left: 40%;
     }
