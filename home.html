@@ -2,89 +2,94 @@
 <html lang="en">
 
 <head>
-    <link rel="icon" type="image/svg+png" href="https://cdn-icons-png.flaticon.com/512/3355/3355341.png">
-    <link rel="stylesheet" href="style/utility.css">
-    <link rel="stylesheet" href="style/home.css">
-    <link rel="stylesheet" href="style/playlist.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Just Chill !</title>
+  <link rel="icon" type="image/svg+png" href="icons/music.svg">
+  <link rel="stylesheet" href="style/utility.css">
+  <link rel="stylesheet" href="style/home.css">
+  <link rel="stylesheet" href="style/footer.css">
+  <link rel="stylesheet" href="style/playlist.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Just Chill !</title>
 </head>
 
 <body>
 
-    <div class="main-content">
-        <div class="round-border right-section">
-            <header class="round-border">
-                <div class="header-content">
-                    <a href="/sign-up"><button>Sign up</button></a>
-                    <a href="/log-in"><button>Log in</button></a>
-                </div>
-            </header>
-            <div class="cart-container">
-                <div class="spotify-list-name">
-                    <p>Spotify Playlists</p>
-                </div>
-                <div class="cart-section">
-
-                </div>
-            </div>
-            <footer class="play-song">
-                <div class="music-player">
-                    <div>
-                        <h3 id="title-name"></h3>
-                    </div>
-                    <div class="controls">
-                        <img alt="Previous" class="invert control-btn" id="previous"
-                            src="https://cdn-icons-png.flaticon.com/512/11908/11908126.png">
-                        <img alt="Play/Pause" class="invert control-btn" id="play"
-                            src="https://cdn-icons-png.flaticon.com/512/18941/18941526.png">
-                        <img alt="Next" class="invert control-btn" id="next"
-                            src="https://cdn-icons-png.flaticon.com/512/1/1371.png">
-                    </div>
-                    <div class="duration">
-                        <h3 id="duration"></h3>
-                        <div>
-                            <img src="https://images.icon-icons.com/1678/PNG/512/wondicon-ui-free-speaker_111240.png"
-                                class="invert" id="volume">
-                            <input type="range" id="volumeSlider" min="0" max="100" value="50">
-                        </div>
-                    </div>
-                </div>
-                <div class="seekbar">
-                    <div class="circle"></div>
-                </div>
-            </footer>
+  <div class="main-content">
+    <div class="round-border right-section">
+      <header class="round-border">
+        <div class="header-content">
+          <a href="/sign-up"><button>Sign up</button></a>
+          <a href="/log-in"><button>Log in</button></a>
         </div>
+      </header>
+      <div class="cart-container">
+        <div class="spotify-list-name">
+          <p>Spotify Playlists</p>
+        </div>
+        <div class="cart-section">
+
+        </div>
+      </div>
+      <footer class="music-footer">
+        <div class="player-left">
+          <img src="/icons/music.svg" alt="Album Art" class="album-art invert">
+          <div class="track-info">
+            <h4 id="track-title">Track Title</h4>
+          </div>
+        </div>
+
+        <div class="player-center">
+          <div class="controls">
+            <img src="/icons/pre.svg" id="prev" class="control-btn">
+            <img src="/icons/play.svg" id="play" class="control-btn">
+            <img src="/icons/next.svg" id="next" class="control-btn">
+          </div>
+          <div class="seek-wrapper">
+            <span id="current-time">0:00</span>
+            <div class="seekbar">
+              <div class="progress-bar"></div>
+              <div class="seek-circle"></div>
+            </div>
+            <span id="total-time">3:45</span>
+          </div>
+        </div>
+
+        <div class="player-right">
+          <img src="/icons/med-vol.svg" class="volume-icon" id="volume">
+          <input type="range" id="volumeSlider" min="0" max="100" value="50">
+        </div>
+      </footer>
+
     </div>
+  </div>
 
-    <div class="spotify-app">
-        <img src="https://cdn-icons-png.flaticon.com/512/9918/9918701.png" alt="close" class="invert" id="close-btn-ye">
-        <main class="main-view">
-            <header class="playlist-header">
-                <img id="playlist-img" src="" alt="Chill Vibes" />
-                <div class="playlist-meta">
-                    <span class="playlist-type">PLAYLIST</span>
-                    <h1 id="playlist-name">Chill Vibes</h1>
-                    <p>Relax and unwind with chilled-out tracks.</p>
-                    <span class="playlist-details">Spotify • <span id="total-songs">10</span> songs, <span
-                            id="total-min">35</span> min</span>
-                </div>
-            </header>
+  <div class="spotify-app">
+    <img src="/icons/close.svg" class="invert" id="close-btn-ye">
+    <main class="main-view">
+      <header class="playlist-header">
+        <img id="playlist-img" src="" alt="Chill Vibes" />
+        <div class="playlist-meta">
+          <span class="playlist-type">PLAYLIST</span>
+          <h1 id="playlist-name">Chill Vibes</h1>
+          <p>Relax and unwind with chilled-out tracks.</p>
+          <span class="playlist-details">Spotify • <span id="total-songs">10</span> songs, <span
+              id="total-min">35</span> min</span>
+        </div>
+      </header>
 
-            <section class="tracklist-header">
-                <div>#</div>
-                <div>Title</div>
-                <div>Duration</div>
-            </section>
+      <section class="tracklist-header">
+        <div>#</div>
+        <div>Title</div>
+        <div>Duration</div>
+      </section>
 
-            <section class="tracklist">
-                <!-- Add more tracks here -->
-            </section>
-        </main>
-    </div>
+      <section class="tracklist">
+        <!-- Add more tracks here -->
+      </section>
+    </main>
+  </div>
 
-    <script src="script/home.js"></script>
+  <script src="script/home.js"></script>
 
 </body>
 

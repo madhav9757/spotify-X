@@ -183,121 +183,6 @@ body {
             }
         }
     }
-
-    footer {
-        height: 12vh;
-        margin-bottom: 5px;
-        display: none;
-        justify-content: space-between;
-        padding-bottom: 5px;
-        align-items: center;
-        flex-direction: column;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        background: linear-gradient(135deg, #2d2d2d, #121212);
-        z-index: 2000;
-
-        .music-player {
-            width: 100%;
-            height: 35px;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            margin-top: 5px;
-
-            >div:first-child {
-                display: flex;
-                align-items: center;
-            }
-
-            #title-name {
-                font-size: 1rem;
-                font-weight: bold;
-            }
-
-            img {
-                width: 35px;
-                height: 35px;
-                transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
-                cursor: pointer;
-                margin: 0px 10px;
-            }
-
-            .control-btn:hover {
-                transform: scale(1.1);
-                opacity: 0.9;
-                filter: brightness(1.2);
-
-                #next {
-                    transform: scale(0.88);
-                }
-
-            }
-
-            .duration {
-                display: flex;
-                align-items: center;
-                gap: 20px;
-
-                >div {
-                    display: flex;
-                    align-items: center;
-
-                    input {
-                        height: 5px;
-                        margin-left: -10px;
-                    }
-                }
-
-                img {
-                    height: 30px;
-                    width: 30px;
-                }
-
-                #duration {
-                    font-size: 0.8rem;
-                    color: #bbb;
-                }
-            }
-
-        }
-
-        .seekbar {
-            position: relative;
-            width: 90%;
-            height: 6px;
-            background: linear-gradient(90deg, #ffffff, #938f8e);
-            border-radius: 3px;
-            cursor: pointer;
-            margin-bottom: 5px;
-
-            ::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 0%;
-                height: 100%;
-                background-color: #1db954;
-                border-radius: 3px;
-            }
-
-            .circle {
-                position: absolute;
-                top: -3px;
-                left: 0;
-                width: 12px;
-                height: 12px;
-                background-color: #1db954;
-                border-radius: 50%;
-                cursor: pointer;
-                transition: left 0.1s ease, background-color 0.2s ease;
-            }
-
-            .circle:hover {
-                background-color: #4bdf73;
-            }
-        }
-    }
 }
 
 
@@ -681,4 +566,28 @@ body {
     .right-section .cart-container .cart-section {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }
+}
+
+.song-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading-shimmer {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.1),
+        transparent
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    100% { left: 200%; }
 }

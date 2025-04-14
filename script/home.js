@@ -21,8 +21,7 @@ async function FindFolder() {
             try {
                 let anc = await fetch(`/songs/${e}/${e}.json`);
                 let bcd = await anc.json();
-                playlistImage = bcd.img;
-                document.getElementById(`card-img-${e}`).src = playlistImage;
+                document.getElementById(`card-img-${e}`).src = bcd.img;
             } catch (error) {
                 console.error(`Failed to load JSON for ${e}`, error);
             }
@@ -32,6 +31,7 @@ async function FindFolder() {
         console.log("error : " + error);
     }
 }
+
 FindFolder();
 
 const playPauseBtn = document.getElementById("play");
@@ -39,6 +39,7 @@ const tracklistContainer = document.querySelector('.tracklist');
 
 let audio = null;
 let songList = [];
+let currentTrack = null; // Track currently playing
 
 async function loadSongs(folder) {
     document.querySelector('.spotify-app').style.display = 'flex';
@@ -79,7 +80,6 @@ async function loadSongs(folder) {
         let html = songList.map((song, i) => {
             const formattedDuration = formatTime(durations[i]);
             totalMinutes += durations[i];
-            // Keep your existing HTML template
             return `<div class="track track-row" data-src="${song.source}" data-title="${song.title}">
                     <div>${i + 1}</div>
                     <div class="track-title-wrapper">
@@ -103,6 +103,7 @@ async function loadSongs(folder) {
                 const src = row.getAttribute('data-src');
                 const title = row.getAttribute('data-title');
 
+                document.querySelector('.music-footer').style.display = 'flex' ;
                 // Remove 'active' from others
                 document.querySelectorAll('.track-row').forEach(t => {
                     t.classList.remove('active');
@@ -119,12 +120,18 @@ async function loadSongs(folder) {
                 button.classList.add('loading');
 
                 try {
-                    playMusic(src, title);
+                    playMusic(src, title, row);
+                    // Instead of setting one combined duration, update current and total times separately
                     const total = formatTime(audio.duration);
-                    document.getElementById('duration').textContent = `00:00 / ${total}`;
+                    document.getElementById('current-time').textContent = "00:00";
+                    document.getElementById('total-time').textContent = total;
                     audio.addEventListener("timeupdate", updateTime);
-                    document.querySelector('.play-song').style.display = 'flex';
-                    document.querySelector('.play-song').scrollIntoView({ behavior: 'smooth' });
+
+                    // Change both player and row button to pause
+                    playPauseBtn.src = 'icons/pause.svg';
+                    button.src = "icons/pause.svg";
+                    document.querySelector('.music-footer').style.display = 'flex';
+                    document.querySelector('.music-footer').scrollIntoView({ behavior: 'smooth' });
 
                     await new Promise(res => setTimeout(res, 300));
                 } catch (err) {
@@ -141,21 +148,66 @@ async function loadSongs(folder) {
     }
 }
 
-function playMusic(source, title) {
+function updateNowPlayingBadge(row) {
+    if (!row) return;
+
+    // First remove all active states and badges
+    document.querySelectorAll('.track-row').forEach(t => {
+        t.classList.remove('active');
+        const badge = t.querySelector('.now-playing-badge');
+        if (badge) {
+            badge.style.display = 'none';
+            badge.style.opacity = '0';
+        }
+    });
+
+    // Then add to current row
+    row.classList.add('active');
+    const badge = row.querySelector('.now-playing-badge');
+    if (badge) {
+        badge.style.display = 'inline-block';
+        badge.style.opacity = '1';
+
+        // Force reflow to ensure animation works
+        void badge.offsetWidth;
+    }
+}
+
+function playMusic(source, title, row) {
     if (audio) {
         audio.pause();
         audio.currentTime = 0;
     }
 
-    playPauseBtn.src = 'https://cdn-icons-png.flaticon.com/512/9513/9513367.png';
-    document.getElementById('title-name').textContent = title;
+    // Reset progress bar and seek circle to the beginning
+    const progressBar = document.querySelector('.progress-bar');
+    const circle = document.querySelector('.seek-circle');
+    if (progressBar) progressBar.style.width = "0%";
+    if (circle) circle.style.left = "0%";
+
+    playPauseBtn.src = 'icons/pause.svg';
+    document.getElementById('track-title').textContent = title;
 
     audio = new Audio(source);
+
+    // ✅ Real-time progress update
+    audio.addEventListener('timeupdate', () => {
+        const percent = (audio.currentTime / audio.duration) * 100;
+        if (progressBar) progressBar.style.width = percent + "%";
+        if (circle) circle.style.left = percent + "%";
+    });
+
+    // Optional: auto-update Now Playing badge
+    if (row) {
+        updateNowPlayingBadge(row);
+    }
 
     audio.play().catch(err => {
         console.warn("Play interrupted:", err);
     });
 }
+
+
 
 playPauseBtn.addEventListener('click', async () => {
     if (!audio) return;
@@ -166,10 +218,10 @@ playPauseBtn.addEventListener('click', async () => {
     try {
         if (audio.paused) {
             await audio.play();
-            playPauseBtn.src = 'https://cdn-icons-png.flaticon.com/512/9513/9513367.png';
+            playPauseBtn.src = '/icons/pause.svg';
         } else {
             audio.pause();
-            playPauseBtn.src = "https://cdn-icons-png.flaticon.com/512/18941/18941526.png";
+            playPauseBtn.src = "icons/play.svg";
         }
     } catch (err) {
         console.warn("Play/Pause error:", err);
@@ -181,20 +233,25 @@ playPauseBtn.addEventListener('click', async () => {
     }, 300);
 });
 
-
-
 function updateTime() {
     if (!audio) return;
     const currentTime = formatTime(audio.currentTime);
     const totalDuration = formatTime(audio.duration);
-    document.getElementById('duration').textContent = `${currentTime} / ${totalDuration}`;
-    document.querySelector('.circle').style.left = (audio.currentTime / audio.duration) * 100 + "%";
+    // Update the two separate time displays
+    document.getElementById('current-time').textContent = currentTime;
+    document.getElementById('total-time').textContent = totalDuration;
+    // Use the new footer seekbar class for the circle
+    const circle = document.querySelector('.seek-circle');
+    if (circle) {
+        circle.style.left = (audio.currentTime / audio.duration) * 100 + "%";
+    }
 
     if (audio.ended) {
         let temp_2 = audio.src.split('/').slice(-2).join('/');
         const index = songList.findIndex(songList => songList.source.endsWith(temp_2));
         if (index !== -1 && index + 1 < songList.length) {
-            playMusic(songList[index + 1].source, songList[index + 1].title);
+            const row = document.querySelector(`.track-row[data-src="${songList[index + 1].source}"]`);
+            playMusic(songList[index + 1].source, songList[index + 1].title, row);
         }
     }
 }
@@ -206,28 +263,51 @@ function formatTime(seconds) {
     return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 }
 
+// Update the seekbar listener to use the new footer-seekbar class
 document.querySelector('.seekbar').addEventListener('click', (e) => {
-    if (!audio) return;
-    let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
-    document.querySelector('.circle').style.left = percent + "%";
-    audio.currentTime = ((audio.duration) * percent) / 100;
+    if (!audio || !audio.duration) return;
+
+    const seekbar = e.currentTarget;
+    const rect = seekbar.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const percent = (offsetX / rect.width) * 100;
+    const progressBar = document.querySelector('.progress-bar');
+    if (progressBar) {
+        progressBar.style.width = percent + "%";
+    }
+
+    const circle = document.querySelector('.seek-circle');
+    if (circle) {
+        circle.style.left = percent + "%";  // Move the circle
+    }
+
+    // Update audio current time based on the clicked position
+    audio.currentTime = (audio.duration * percent) / 100;
+
 });
 
-document.getElementById('previous').addEventListener('click', () => {
-    let temp_2 = decodeURIComponent(audio.src.split('/').slice(-1).join('/').replace(/\.(mp3|flac)$/, ''));
-    const index = songList.findIndex(songList => songList.title === temp_2);
+
+document.getElementById('prev').addEventListener('click', () => {
+    const currentSrc = audio.src.split('/').slice(-1)[0];
+    const index = songList.findIndex(song =>
+        song.source.endsWith(currentSrc)
+    );
 
     if (index - 1 >= 0) {
-        playMusic(songList[index - 1].source, songList[index - 1].title);
+        const row = document.querySelector(`.track-row[data-src="${songList[index - 1].source}"]`);
+        playMusic(songList[index - 1].source, songList[index - 1].title, row);
     }
 });
 
 document.getElementById('next').addEventListener('click', () => {
-    let temp_2 = decodeURIComponent(audio.src.split('/').slice(-1).join('/').replace(/\.(mp3|flac)$/, ''));
-    const index = songList.findIndex(songList => songList.title === temp_2);
+    const currentSrc = audio.src.split('/').slice(-1)[0];
+    const index = songList.findIndex(song =>
+        song.source.endsWith(currentSrc)
+    );
 
     if (index !== -1 && index + 1 < songList.length) {
-        playMusic(songList[index + 1].source, songList[index + 1].title);
+        const row = document.querySelector(`.track-row[data-src="${songList[index + 1].source}"]`);
+        playMusic(songList[index + 1].source, songList[index + 1].title, row);
     }
 });
 
@@ -251,7 +331,7 @@ volumeIcon.addEventListener("click", () => {
         volumeSlider.value = 0;
         isMuted = true;
     } else {
-        audio.volume = 0.51;
+        audio.volume = 0.51;  // Or any reasonable default like 50%
         volumeSlider.value = 51;
         isMuted = false;
     }
@@ -260,14 +340,28 @@ volumeIcon.addEventListener("click", () => {
 
 function updateVolumeIcon(volume) {
     if (volume === 0) {
-        volumeIcon.src = "https://images.icon-icons.com/3106/PNG/512/sound_speaker_mute_sound_off_icon_191602.png";
-    } else if (volume < 0.5) {
-        volumeIcon.src = "https://images.icon-icons.com/3415/PNG/512/low_sound_icon_218201.png";
+        volumeIcon.src = "icons/mute.svg";
+    } else if (volume <= 0.3 && volume > 0) {
+        volumeIcon.src = "icons/low-vol.svg";
+    } else if (volume <= 0.6 && volume > 0.3) {
+        volumeIcon.src = "icons/med-vol.svg";
     } else {
-        volumeIcon.src = "https://images.icon-icons.com/3691/PNG/512/music_loud_sound_audio_icon_229540.png";
+        volumeIcon.src = "icons/high-vol.svg";
     }
 }
 
+// Initialize the volume icon and slider when audio is loaded
+audio.addEventListener('loadeddata', () => {
+    if (audio.volume === 0) {
+        volumeSlider.value = 0;
+        volumeIcon.src = "icons/volume-mute.svg";
+    } else {
+        volumeSlider.value = audio.volume * 100;
+        updateVolumeIcon(audio.volume);
+    }
+});
+
+
 document.getElementById('close-btn-ye').addEventListener('click', () => {
     document.querySelector('.spotify-app').style.display = 'none';
-})
+});
