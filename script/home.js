@@ -43,7 +43,8 @@ let currentTrack = null; // Track currently playing
 
 async function loadSongs(folder) {
     document.querySelector('.spotify-app').style.display = 'flex';
-
+    document.getElementById('playlist-name').textContent = folder ;
+    
     try {
         const response = await fetch(`/api/songs/${folder}`);
         if (!response.ok) throw new Error(`HTTP error ${response.status}`);
