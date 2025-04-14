@@ -329,10 +329,12 @@ volumeIcon.addEventListener("click", () => {
     if (!isMuted) {
         audio.volume = 0;
         volumeSlider.value = 0;
+        volumeIcon.src = "icons/mute.svg"
         isMuted = true;
     } else {
         audio.volume = 0.51;  // Or any reasonable default like 50%
         volumeSlider.value = 51;
+        volumeIcon.src = "icons/med-vol.svg"
         isMuted = false;
     }
     updateVolumeIcon(audio.volume);
@@ -349,17 +351,6 @@ function updateVolumeIcon(volume) {
         volumeIcon.src = "icons/high-vol.svg";
     }
 }
-
-// Initialize the volume icon and slider when audio is loaded
-audio.addEventListener('loadeddata', () => {
-    if (audio.volume === 0) {
-        volumeSlider.value = 0;
-        volumeIcon.src = "icons/volume-mute.svg";
-    } else {
-        volumeSlider.value = audio.volume * 100;
-        updateVolumeIcon(audio.volume);
-    }
-});
 
 
 document.getElementById('close-btn-ye').addEventListener('click', () => {

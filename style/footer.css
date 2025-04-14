@@ -4,21 +4,28 @@
     width: 90%;
     height: 80px;
     background: linear-gradient(135deg, #2a3926, #1f4429);
-    display: none;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 0 30px;
+    padding: 10px 30px;
     color: #fff;
     z-index: 9999;
-    border-radius: 10px ;
+    border-radius: 10px;
     box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.6);
     font-family: 'Segoe UI', sans-serif;
     backdrop-filter: blur(8px);
     margin: 0% 5%;
 }
 
+.main {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .track-info h4,
-.track-info p,
 #current-time,
 #total-time {
     color: #f1f1f1;
@@ -49,34 +56,26 @@
     display: flex;
     align-items: center;
     gap: 15px;
-}
-
-.track-info {
-    display: flex;
-    flex-direction: column;
+    width: 300px;
 }
 
 .track-info h4 {
+    width: fit-content;
     margin: 0;
     font-size: 1rem;
 }
 
-.track-info p {
-    margin: 0;
-    font-size: 0.8rem;
-    color: #ccc;
-}
-
 .player-center {
+    position: absolute;
+    left: 46%;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    width: min-content;
 }
 
 .controls {
     display: flex;
     gap: 25px;
-    margin-bottom: 8px;
 }
 
 .control-btn {
@@ -142,6 +141,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    width: min-content;
 }
 
 .volume-icon {
@@ -209,4 +209,88 @@
     height: 12px;
     box-shadow: 0 0 6px rgba(30, 215, 96, 0.6);
     cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .music-footer {
+        width: 96%;
+        margin: 0% 2%;
+        overflow-x: hidden;
+        /* Reduce padding */
+    }
+
+    .track-info {
+        width: 150px;
+        text-align: center;
+    }
+
+    .seek-wrapper {
+        width: 100%;
+        /* Adjust seekbar for smaller screens */
+    }
+
+    .player-left,
+    .player-center,
+    .player-right {
+        height: fit-content;
+        width: min-content;
+        height: 40px;
+        gap: 10px;
+    }
+
+    .album-art-log {
+        display: none;
+        width: 40px;
+        height: 40px;
+    }
+
+    .control-btn {
+        width: 24px;
+        height: 24px;
+    }
+
+    .seekbar {
+        height: 4px;
+        /* Smaller seekbar height */
+    }
+
+    .volume-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    #volumeSlider {
+        width: 80px;
+        /* Shorter volume slider */
+    }
+}
+
+/* For even smaller screens (e.g., portrait on phones) */
+@media (max-width: 480px) {
+    .track-info h4 {
+        font-size: 0.7rem;
+        width: 130px;
+        margin-left: -20px;
+        /* Smaller title font */
+    }
+    .player-center{
+        left: 40%;
+    }
+
+    .controls {
+        gap: 15px;
+    }
+
+    .control-btn {
+        width: 22px;
+        height: 22px;
+    }
+
+    .player-right{
+        margin-right: -20px;
+    }
+    #volumeSlider {
+        width: 50px;
+        /* Even smaller slider */
+    }
 }
