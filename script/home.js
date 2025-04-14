@@ -202,9 +202,18 @@ function playMusic(source, title, row) {
         updateNowPlayingBadge(row);
     }
 
-    audio.play().catch(err => {
+    // Check if audio is already playing
+    // Check if audio is already playing
+    if (audio.paused && !playing) { // Check the playing flag
+        console.log("Audio state before play:", audio.paused);
+        playing = true; // Set the flag
+        audio.play().then(() => {
+            playing = false; // Clear the flag when playback starts
+        }).catch(err => {
+            playing = false; // Clear the flag if play fails
         console.warn("Play interrupted:", err);
     });
+    }
 }
 
 
