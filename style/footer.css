@@ -276,6 +276,11 @@
         margin-left: -20px;
         /* Smaller title font */
     }
+
+    .main{
+        padding: 0px 15px ;
+    }
+    
     .player-center{
         left: 40%;
     }
@@ -293,7 +298,7 @@
         margin-right: -20px;
     }
     #volumeSlider {
-        width: 50px;
+        width: 70px;
         /* Even smaller slider */
     }
 }

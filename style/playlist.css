@@ -23,6 +23,10 @@
     flex: 1;
     padding: 60px 100px;
     overflow-y: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 /* Playlist header */
@@ -122,29 +126,19 @@
 
 /* Scrollbar */
 .main-view::-webkit-scrollbar {
-    width: 10px;
+    display: none;
 }
 
-.main-view::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.main-view::-webkit-scrollbar-thumb {
-    background-color: #333;
-    border-radius: 5px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-}
 
 @media (max-width: 600px) {
 
     .main-view {
-        padding: 0px 20px;
+        padding: 0px 10px;
     }
 
     .spotify-app {
 
-        padding: 20px 20px;
+        padding: 20px 10px;
 
         #close-btn-ye {
             height: 25px;
@@ -170,8 +164,13 @@
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .track-title-wrapper {
@@ -190,7 +189,15 @@
 }
 
 @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

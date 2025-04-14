@@ -43,7 +43,8 @@ let currentTrack = null; // Track currently playing
 
 async function loadSongs(folder) {
     document.querySelector('.spotify-app').style.display = 'flex';
-
+    document.getElementById('playlist-name').textContent = folder ;
+    
     try {
         const response = await fetch(`/api/songs/${folder}`);
         if (!response.ok) throw new Error(`HTTP error ${response.status}`);
@@ -202,18 +203,9 @@ function playMusic(source, title, row) {
         updateNowPlayingBadge(row);
     }
 
-    // Check if audio is already playing
-    // Check if audio is already playing
-    if (audio.paused && !playing) { // Check the playing flag
-        console.log("Audio state before play:", audio.paused);
-        playing = true; // Set the flag
-        audio.play().then(() => {
-            playing = false; // Clear the flag when playback starts
-        }).catch(err => {
-            playing = false; // Clear the flag if play fails
+    audio.play().catch(err => {
         console.warn("Play interrupted:", err);
     });
-    }
 }
 
 

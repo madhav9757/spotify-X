@@ -34,19 +34,19 @@ body {
 
     header {
         width: 100%;
-        height: 7vh;
+        height: 6vh;
         padding: 5px 10px;
+        padding-left: 60px;
         background-color: #181818;
         display: flex;
         justify-content: space-between;
         align-items: center;
         box-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
 
-        .hamburger {
-            display: none;
-
-            img {
-                height: 30px;
+        .spotify-list-name {
+            p {
+                font-size: 1.2rem;
+                font-weight: 900;
             }
         }
 
@@ -82,19 +82,10 @@ body {
 
     .cart-container {
         max-height: 90vh;
-        overflow-y: auto;
         overflow-x: hidden;
-        scrollbar-width: thin;
-        scrollbar-color: #1db954 #333;
-
-        .spotify-list-name {
-            padding: 6px 10px;
-
-            p {
-                font-size: 0.8rem;
-                font-weight: 900;
-            }
-        }
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
 
         .cart-section {
             display: grid;
@@ -212,7 +203,7 @@ body {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-            
+
             }
 
             .cart-section {
@@ -302,13 +293,12 @@ body {
             width: 100vw;
 
             header {
-                height: 10vh;
+                height: 6vh;
 
-                .hamburger {
-                    display: flex;
-
-                    img {
-                        height: 30px;
+                .spotify-list-name {
+                    p {
+                        font-size: 1rem;
+                        font-weight: 900;
                     }
                 }
 
@@ -575,15 +565,20 @@ body {
     left: -100%;
     width: 50%;
     height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.1),
-        transparent
-    );
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent);
     animation: shimmer 1.5s infinite;
 }
 
 @keyframes shimmer {
-    100% { left: 200%; }
+    100% {
+        left: 200%;
+    }
+}
+
+::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari/Edge */
 }

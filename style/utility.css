@@ -10,24 +10,31 @@
 
 /* Scrollbar for WebKit (Chrome, Safari) */
 ::-webkit-scrollbar {
-    width: 6px; /* Thinner width */
+    width: 6px;
+    /* Thinner width */
     height: 6px;
-    margin-left: 10px; /* Space between content and scrollbar */
+    display: none;
+    /* Chrome/Safari/Edge */
+    margin-left: 10px;
+    /* Space between content and scrollbar */
 }
 
 ::-webkit-scrollbar-track {
-    background: #121212; /* Dark background */
+    background: #121212;
+    /* Dark background */
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #1db954; /* Spotify green */
+    background: #1db954;
+    /* Spotify green */
     border-radius: 10px;
     border: 2px solid #121212;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #1ed760; /* Lighter green on hover */
+    background: #1ed760;
+    /* Lighter green on hover */
 }
 
 /* For Firefox */
