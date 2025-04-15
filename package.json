@@ -2,5 +2,8 @@
   "dependencies": {
     "express": "^5.1.0",
     "node": "^23.11.0"
+  } ,
+  "scripts": {
+    "start": "node index.js"
   }
 }
