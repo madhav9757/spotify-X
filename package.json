@@ -4,6 +4,6 @@
     "node": "^23.11.0"
   } ,
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   }
 }
