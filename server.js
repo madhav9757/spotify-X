@@ -31,14 +31,6 @@ app.get('/sign-up', (req, res) => {
     });
 });
 
-app.get('/playlist', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'playlist.html'), (err) => {
-        if (err) {
-            res.status(err.status).end();
-        }
-    });
-});
-
 // API route: Get folder names in /songs
 app.get('/api/songs', (req, res) => {
     const songsDir = path.join(__dirname, 'songs');
